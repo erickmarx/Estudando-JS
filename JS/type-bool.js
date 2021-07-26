@@ -6,7 +6,12 @@ const segundoNumero = 10
 // senha
 
 let cadastroAtivado = false;
-const texto1 = 'alura'
-const texto2 = 'Alura'
+// const texto1 = 'alura'
+// const texto2 = 'Alura'
+// console.log(texto1 === texto2)
 
-console.log(texto1 === texto2)
+
+const test1 = 0
+const test2 = false
+console.log(test1 == test2)
+
