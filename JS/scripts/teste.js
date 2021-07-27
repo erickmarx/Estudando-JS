@@ -1,7 +1,16 @@
-const nome = "Leo";
-const idade = 23;
-const bebidaMaior = "cerveja";
-const bebidaMenor = "suco";
+let listaFuncionarios = ['José', 'Ana', 'Luiza']
+let listaIdades = [22,19,33]
 
-const pedido = `${nome} diz: "por favor, quero beber ${idade >= 18 ? bebidaMaior : bebidaMenor}"`
-console.log(pedido)
+const exibeLista = (lista, descricao) => {
+    e = ''
+        for (let i = 0; i < lista.length; i++){
+            e = e + '\n'+ descricao + lista [i]
+            console.log(e)
+        }
+    return e
+}
+
+console.log(exibeLista(listaFuncionarios, 'Funcionário: '))
+console.log(exibeLista(listaIdades, "Idades: "))
+
+
