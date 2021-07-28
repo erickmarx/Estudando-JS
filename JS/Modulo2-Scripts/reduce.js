@@ -12,6 +12,6 @@
 
 const notas = [10,6.5,8,7]
 
-const media = notas.reduce((x, y) => y + x, 0) / notas.length
+const media = notas.reduce((x, y) => x + y, 0) / notas.length
 
 console.log(media)
