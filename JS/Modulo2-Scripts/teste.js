@@ -1,4 +1,5 @@
-const arrayNums = [1, 2, 3, 4]
-const numsMultiply = arrayNums.map(x => x * 10)
+const numeros = [43, 50, 65, 12]
 
-console.log(numsMultiply)
+const soma = numeros.reduce((acum, atual) => acum + atual)
+
+console.log(soma)
