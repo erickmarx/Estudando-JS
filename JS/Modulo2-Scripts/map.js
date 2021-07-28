@@ -20,6 +20,13 @@ const notasMap2 = notas.map(function nota(nota){
     }
 })
 
+/*
+var map = Array.prototype.map;
+var a = map.call('Hello World', function(x) { return x.charCodeAt(0); });
+// a agora vale [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]
+*/
+
 // console.log(notasMap)
 // console.log(notasMap1)
 // console.log(notasMap2)
+console.log(notasMap3)

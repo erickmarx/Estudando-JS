@@ -1,5 +1,4 @@
-const arrayVazia = [,,,];
-console.log(arrayVazia.length)
-arrayVazia.push(50)
-console.log(arrayVazia)
-console.log(arrayVazia.length)
+const arrayNums = [1, 2, 3, 4]
+const numsMultiply = arrayNums.map(x => x * 10)
+
+console.log(numsMultiply)

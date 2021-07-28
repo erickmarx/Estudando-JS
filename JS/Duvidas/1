@@ -1,7 +1,6 @@
-/*
-Principais diferenças de functions e arrow function e quando usar
-
-Consegui usar Map com operador ternario mas não com if tradional em Modulo2/map.js
+Principais diferenças de functions e arrow function e quando usar.
 
 
-*/
+Consegui usar Map com operador ternario mas não com if tradional em Modulo2/map.js!
+Exemplos que eu vi mostram usando map com function externa ao metodo, .map aceita somente arrow function?
+
