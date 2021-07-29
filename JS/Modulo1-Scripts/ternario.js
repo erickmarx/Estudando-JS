@@ -8,3 +8,4 @@ if(idadeCliente >= idadeMin){
 
 // console.log(idadeCliente >= idadeMin ? 'cerveja' : 'suco')
 
+keyIsDown(UP_ARROW) ? playersArray.splice(1,1,playersArray[1]-5) : playersArray[1]
