@@ -21,7 +21,10 @@ function draw(){ // chamar funções
 
 function players(){    //movimento dos players
   keyIsDown(UP_ARROW) ? playersArray.splice(0,1,playersArray[0]-5) : 0 //mover para cima o player1
-    keyIsDown(DOWN_ARROW) ? playersArray.splice(0,1,playersArray[0]+5) : playersArray[0] //mover para baixo o player1
+  keyIsDown(DOWN_ARROW) ? playersArray.splice(0,1,playersArray[0]+5) : playersArray[0] //mover para baixo o player1
+  
+  playersArray[0] <= height - height ? playersArray[0] = 0 : playersArray[0] >= height - 100 ? playersArray[0] = height - 100 : 0
+  
   
   if(ball[1] < 510 && ball[1] > 0) { //limitação de movimento do player 2
     playersArray.splice(1,1,ball[1]) //movimento automatico do player 2
