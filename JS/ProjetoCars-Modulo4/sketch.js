@@ -11,6 +11,6 @@ function draw() {
   movCars()
   points()
   collisionActor()
-  
+  limitActor()
 }
 
