@@ -1,0 +1,5 @@
+//recuperar os nomes dos funcionários que não possuam dependentes
+
+select tb_funcionario.PRIMEIRO_NOME from tb_funcionario left join tb_dependente
+on tb_funcionario.CPF = tb_dependente.CPF_FUNCIONARIO
+where tb_dependente.CPF_FUNCIONARIO is null;

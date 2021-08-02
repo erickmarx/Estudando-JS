@@ -1,0 +1,4 @@
+//Eu preciso recuperar o nome e o endereço de todos os funcionários que trabalham para o departamento de pesquisa.
+
+select tb_funcionario.PRIMEIRO_NOME, tb_funcionario.ENDERECO from tb_funcionario inner join tb_departamento on tb_departamento.NUMERO_DEPARTAMENTO = tb_funcionario.NUMERO_DEPARTAMENTO
+where tb_departamento.NOME_DEPARTAMENTO = 'Pesquisa'

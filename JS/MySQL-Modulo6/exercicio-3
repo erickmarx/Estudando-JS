@@ -1,0 +1,1 @@
+select tb_funcionario.PRIMEIRO_NOME from tb_funcionario inner join tb_trabalha_em on tb_trabalha_em.CPF_FUNCIONARIO = tb_funcionario.CPF inner join tb_projeto on tb_trabalha_em.NUMERO_PROJETO = tb_projeto.NUMERO_PROJETO where tb_projeto.NUMERO_DEPARTAMENTO = 5

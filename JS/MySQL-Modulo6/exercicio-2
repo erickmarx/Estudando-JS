@@ -1,0 +1,8 @@
+ Para cada projeto localizado em Mauá vou listar o número do projeto, o número do departamento que controla aquele projeto, e o último nome, endereço e data de nascimento do gerente do departamento.
+
+select tb_projeto.NUMERO_PROJETO, tb_projeto.NUMERO_DEPARTAMENTO, tb_funcionario.ULTIMO_NOME, tb_funcionario.ENDERECO, tb_funcionario.DATA_NASCIMENTO 
+from tb_projeto inner join tb_departamento 
+on tb_projeto.NUMERO_DEPARTAMENTO = tb_departamento.NUMERO_DEPARTAMENTO
+inner join tb_funcionario 
+on tb_departamento.CPF_GERENTE = tb_funcionario.CPF
+where tb_projeto.LOCAL_PROJETO = 'Mauá'

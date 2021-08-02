@@ -1,0 +1,64 @@
+create scheme *nome*
+create table *nome*
+
+
+
+//constraint: criar restrição
+    alter table *tabela restringir* add constraint *nome unico*
+    alter table TB_DEPENDENTE ADD CONSTRAINT tb_funcionario_tb_dependente_fk
+
+
+
+//chave estrangeira:
+    foreign key (*chave estrangeira+*)
+    FOREIGN KEY (CPF_FUNCIONARIO);
+
+
+
+//referenciar valor para chave:
+    references *tabela estrangeira* (*chave primaria*)
+    REFERENCES TB_FUNCIONARIO (CPF);
+
+
+
+//inserir valores
+    insert into *tabela*
+    ('*chave1*', '*chave2*', '*chave3*')
+    values
+    ('*valor1*', '*valor2*', '*valor3*'), ('*valor1*', '*valor2*', '*valor3*');
+
+
+
+//selecionar chaves
+    select *chave*, *chave* from *tabela*, *tabela* where *chave* = *valor*
+
+    select tb_funcionario.PRIMEIRO_NOME, tb_funcionario.ULTIMO_NOME, tb_funcionario.CPF, tb_dependente.NOME_DEPENDENTE
+    from tb_funcionario, tb_dependente where tb_funcionario.sexo = 'F' 
+    and tb_funcionario.cpf = tb_dependente.CPF_FUNCIONARIO;
+
+
+
+//POSSIBILIDADE DE UNIR UMA OU MAIS TABELAS ATRAVES DE CAMPOS EM COMUM
+    //inner join - retorna somente quando temos chaves correspodentes
+    tabela_esquerda as a, tabela_direita as b; //alias
+    select a.nome, b.hobby from a inner join b on a.identificador = b.identificador;
+
+    //left join - retorna todos da tabela da esquerda e somente os correspodentes da tabela direita, e chaves NULL
+    select a.nome, b.hobby from a left join b on a.identificador = b.identificador;
+
+    //left join - retorna todos da tabela da direita e somente os correspodentes da tabela esquerda, e chaves NULL
+    select a.nome, b.hobby from a right join b on a.identificador = b.identificador;
+
+    //full join - retorna todos os valores e preenche com NULL os não correspodentes
+    select a.nome, b.hobby from a full join b on a.identificador = b.identificador;
+
+    //cross join - retorna o produto cartesiano das tabelas
+    select a.nome, b.hobby from a, b
+
+    //EXEMPLO
+    select tb_projeto.NOME_PROJETO, tb_projeto.NUMERO_DEPARTAMENTO, tb_funcionario.PRIMEIRO_NOME from tb_projeto
+        inner join tb_departamento 
+        on tb_projeto.NUMERO_DEPARTAMENTO = tb_departamento.NUMERO_DEPARTAMENTO
+        inner join tb_funcionario on tb_funcionario.CPF = tb_departamento.CPF_GERENTE;
+
+        
