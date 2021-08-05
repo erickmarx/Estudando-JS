@@ -10,11 +10,19 @@ roteador.get('/', async (requisicao, resposta) => {
 })
 
 roteador.post('/', async (requisicao, resposta) => {
-    const dadosRecebidos = requisicao.body
-    const fornecedor = new Fornecedor(dadosRecebidos)
-    await fornecedor.criar()
-    resposta.send(
+    try{
+        const dadosRecebidos = requisicao.body
+        const fornecedor = new Fornecedor(dadosRecebidos)
+        await fornecedor.criar()
+        resposta.send(
         JSON.stringify(fornecedor))
+    }catch(erro){
+        resposta.send(
+            JSON.stringify({
+                mensagem: erro.message
+            })
+        )
+    }
 })
 
 roteador.get('/:idFornecedor', async (requisicao, resposta) => {
@@ -44,6 +52,20 @@ roteador.put('/:idFornecedor', async (requisicao, resposta) => {
         resposta.end()
     } catch(erro) {
         resposta.send(JSON.stringify({mensagem: erro.message}))
+    }
+})
+
+roteador.delete('/:idFornecedor', async (requisicao, resposta) => {
+    
+    try{
+        const id = requisicao.params.idFornecedor
+        const fornecedor = new Fornecedor({id: id})
+        await fornecedor.carregar()
+        await fornecedor.remover()
+        resposta.end
+    } catch(erro) {
+        resposta.send(
+        JSON.stringify({mensagem: erro.message}))
     }
 })
 

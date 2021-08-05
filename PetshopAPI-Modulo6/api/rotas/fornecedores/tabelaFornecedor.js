@@ -1,3 +1,4 @@
+const modeloTabelaFornecedor = require('./modelo-tabela-fornecedor')
 const Modelo = require('./modelo-tabela-fornecedor')
 
 
@@ -26,6 +27,11 @@ module.exports = {
                 where: {id: id}
             }
         )
+    },
+    remover(id){
+        return Modelo.destroy({
+            where: {id: id}
+        })
     }
 
     

@@ -1,1 +1,1 @@
-apesar da porta estar na json config, não consigo usar ela em index.js
+função Delete do post não finaliza o "sending" mas aplica o delete na database
