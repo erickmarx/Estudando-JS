@@ -16,7 +16,7 @@ roteador.get('/:idFornecedor', async (requisicao, resposta) => {
     const fornecedor = new Fornecedor({id: id})
     await fornecedor. carregar()
     resposta.status(200)
-    resposta.send(
+    resposta.JSON(
         JSON.stringify(fornecedor)
     )
 } catch (erro) {
@@ -70,7 +70,7 @@ roteador.delete('/:idFornecedor', async (requisicao, resposta) => {
         await fornecedor.carregar()
         await fornecedor.remover()
         resposta.status(204)
-        resposta.end
+        resposta.end()
     } catch(erro) {
         resposta.status(404)
         resposta.send(

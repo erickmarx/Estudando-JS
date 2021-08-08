@@ -1,4 +1,3 @@
-const modeloTabelaFornecedor = require('./modelo-tabela-fornecedor')
 const Modelo = require('./modelo-tabela-fornecedor')
 
 
