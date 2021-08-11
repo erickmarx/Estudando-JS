@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,5 +28,8 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
+  },
+  "events": {
+    "start": "echo \"\\x1Bc\""
   }
 }
