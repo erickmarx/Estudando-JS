@@ -22,7 +22,7 @@ const opcoes = {
     timestamps: true,
     createdAt: 'dataCriacao',
     updatedAt: 'dataAtualizacao',
-    versao: 'versao'
+    version: 'versao'
 }
 
 module.exports = instancia.define('fornecedores', colunas, opcoes)
