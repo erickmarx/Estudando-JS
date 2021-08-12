@@ -11,6 +11,7 @@ class Fornecedor{
         this.versao = versao
     }
     async criar(){
+        this.validar()
         const resultado = await tabelaFornecedor.inserir({
             empresa: this.empresa,
             email: this.email,
@@ -49,6 +50,20 @@ class Fornecedor{
 
             await tabelaFornecedor.atualizar(this.id, dadosParaAtualizar)
 
+    }
+
+    async remover(){
+        return tabelaFornecedor.remover(this.id)
+    }
+
+    validar(){
+        const campos = ['empresa','email','categoria']
+        campos.forEach((i) => {
+            const valor = this[i]
+            if(typeof valor !== 'string' || valor.length === 0){
+                throw new Error(`O campo '${i}' é invalido`)
+            }
+        })
     }
 }
 
