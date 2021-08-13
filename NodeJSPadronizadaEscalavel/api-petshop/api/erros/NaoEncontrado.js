@@ -3,8 +3,6 @@ class NaoEncontrado extends Error{
         super('Fornecedor não foi encontrado')
         this.name = 'NaoEncontrado'
         this.idErro = 0
-
-        
     }
 }
 

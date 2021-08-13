@@ -1,4 +1,6 @@
 const tabelaFornecedor = require("./tabelaFornecedor")
+const CampoInvalido = require('../../erros/CampoInvalido')
+const DadosNaoFornecidos = require('../../erros/DadosNaoFornecidos')
 
 class Fornecedor{
     constructor({id, empresa, email, categoria, dataCriacao, dataAtualizacao, versao}){
@@ -45,7 +47,7 @@ class Fornecedor{
             }
         })
             if(Object.keys(dadosParaAtualizar).length === 0){
-                throw new Error('Não foram fornecidos dados para atualizar')
+                throw new DadosNaoFornecidos()
             }
 
             await tabelaFornecedor.atualizar(this.id, dadosParaAtualizar)
@@ -61,7 +63,7 @@ class Fornecedor{
         campos.forEach((i) => {
             const valor = this[i]
             if(typeof valor !== 'string' || valor.length === 0){
-                throw new Error(`O campo '${i}' é invalido`)
+                throw new CampoInvalido(i)
             }
         })
     }
