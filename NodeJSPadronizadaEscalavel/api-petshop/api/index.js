@@ -6,7 +6,7 @@ const NaoEncontrado = require('./erros/NaoEncontrado')
 const CampoInvalido = require('./erros/CampoInvalido')
 const DadosNaoFornecidos = require('./erros/DadosNaoFornecidos')
 const ValorNaoSuportado = require('./erros/ValorNaoSuportado')
-const { formatosAceitos } = require('./Serializador')
+const { formatosAceitos, SerializadorErro } = require('./Serializador')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}))
@@ -45,11 +45,16 @@ app.use((err, _, res, next) => {
         status = 406
     }
 
+    const serializar = new SerializadorErro(
+        res.getHeader('Content-Type')
+        )
     res.status(status)
-    res.json({
+    res.send(serializar.serializar({
         mensagem: err.message,
         id: err.idErro
-    })
+        })
+    )
+    
 })
 
 app.listen(config.get('api.port'), () => console.log('funcionando'))
