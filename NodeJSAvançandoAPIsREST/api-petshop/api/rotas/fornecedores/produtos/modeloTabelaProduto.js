@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const instancia = require('../../../banco-de-dados')
 
 const colunas = {
-    nome: {
+    titulo: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -14,6 +14,14 @@ const colunas = {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0
+    },
+    fornecedor: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: require('../modeloTabelaFornecedor'),
+            key: 'id'
+        }
     }
 }
 

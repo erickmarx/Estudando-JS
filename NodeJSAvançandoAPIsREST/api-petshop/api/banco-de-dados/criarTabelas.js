@@ -1,6 +1,6 @@
 const modelosTabela = [
     require('../rotas/fornecedores/modeloTabelaFornecedor'),
-    require('../rotas/fornecedores/produtos/modeloTabelaFornecedor')
+    require('../rotas/fornecedores/produtos/modeloTabelaProduto')
 ]
 async function criarTabelas(){
     for(let i = 0; i < modelosTabela.length; i++){
