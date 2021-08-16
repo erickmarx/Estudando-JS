@@ -2,6 +2,7 @@ const roteador = require('express').Router()
 const tabelaFornecedor = require('./tabelaFornecedor')
 const Fornecedor = require('./Fornecedores') 
 const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor
+const roteadorProdutos = require('./produtos')
 
 
 roteador.get('/', async(_, res) => {
@@ -25,19 +26,19 @@ roteador.get('/:idFornecedor', async (req, res, next) => {
 
 roteador.post('/', async(req, res, next) => {
     try{
-            const recebidos = req.body
-            const fornecedor = new Fornecedor(recebidos)
-            await fornecedor.criar()
-            const serializador = new SerializadorFornecedor(res.getHeader('Content-Type'))
-            res.send(serializador.serializar(fornecedor)).status(200)
+        const recebidos = req.body
+        const fornecedor = new Fornecedor(recebidos)
+        await fornecedor.criar()
+        const serializador = new SerializadorFornecedor(res.getHeader('Content-Type'))
+        res.send(serializador.serializar(fornecedor)).status(200)
     }catch(erro){
         next(erro)
     }
 })
-    
+
 
 roteador.put('/:idFornecedor', async(req, res, next) => {
-
+    
     try{
         const id = req.params.idFornecedor
         const dadosRecebidos = req.body
@@ -61,5 +62,7 @@ roteador.delete('/:idFornecedor', async(req, res) => {
         res.status(400).json({mensagem: erro.message, id: idErro})
     }
 })
+
+roteador.use('/:idFornecedor/produtos', roteadorProdutos)
 
 module.exports = roteador
