@@ -3,13 +3,13 @@ const tabela = require('./tabelaProdutos')
 const Produto = require('./Produto')
 
 roteador.get('/', async (req, res) => {
-    const produtos = await tabela.listar(req.params.idFornecedor)
+    const produtos = await tabela.listar(req.fornecedor.id)
     res.json(produtos)
 })
 
 roteador.post('/', async(req, res, next) => {
     try{
-        const idFornecedor = req.params.idFornecedor
+        const idFornecedor = req.fornecedor.id
         const corpo = req.body
         const dados = Object.assign({}, corpo, {fornecedor: idFornecedor})
         const produto = new Produto(dados)
@@ -23,7 +23,7 @@ roteador.post('/', async(req, res, next) => {
 roteador.delete('/:idProduto', async (req, res) => {
     dados = {
         id: req.params.idProduto,
-        fornecedor: req.params.idFornecedor
+        fornecedor: req.fornecedor.id
     }
     const produto = new Produto(dados)
     await produto.deletar(dados)
