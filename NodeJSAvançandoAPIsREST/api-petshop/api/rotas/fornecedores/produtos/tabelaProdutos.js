@@ -4,8 +4,12 @@ module.exports = {
     listar(idFornecedor){
         return Modelo.findAll({
             where: {
-                id: idFornecedor
+                fornecedor: idFornecedor
             }
         })
+    },
+
+    inserir(dados){
+        return Modelo.create(dados)
     }
 }
