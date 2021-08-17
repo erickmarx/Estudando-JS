@@ -1,1 +1,1 @@
-acessar req.fornecedor invés de req.params - https://github.com/erickmarx/Estudando-JS/commit/f8a7f93a9baf2a79fdb5789287a4c256e836be6c
+acessar req.fornecedor invés de req.params - https://github.com/erickmarx/Estudando-JS/commit/f8a7f93a9baf2a79fdb5789287a4c256e836be6c - https://github.com/erickmarx/Estudando-JS/commit/6de209dc8f479ea772fa7418bd0fd1bf7740a92b
