@@ -48,4 +48,19 @@ roteador.get('/:idProduto', async(req, res, next) => {
     }
 })
 
+roteador.put('/:idProduto', async(req, res, next) => {
+    try{
+        const dados = Object.assign({}, req.body, {
+            id: req.params.idProduto,
+            fornecedor: req.fornecedor.id
+        })
+
+        const produto = new Produto(dados)
+        await produto.atualizar()
+        res.status(204).end()
+    }catch(err){
+        next(err)
+    }
+})
+
 module.exports = roteador
