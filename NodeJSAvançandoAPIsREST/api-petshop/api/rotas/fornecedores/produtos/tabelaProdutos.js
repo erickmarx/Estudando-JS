@@ -20,5 +20,19 @@ module.exports = {
                 fornecedor: idFornecedor
             }
         })
+    },
+
+    carregarUmProduto(idProduto, idFornecedor){
+        const encontrado = Modelo.findOne({
+            where: {
+                id: idProduto,
+                fornecedor: idFornecedor
+            }
+        })
+        if(!encontrado){
+            throw new Error('Produto não encontrado')
+        }
+
+        return encontrado
     }
 }
