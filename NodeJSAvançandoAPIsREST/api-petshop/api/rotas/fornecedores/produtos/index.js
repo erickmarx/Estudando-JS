@@ -1,10 +1,12 @@
 const roteador = require('express').Router({mergeParams: true})
 const tabela = require('./tabelaProdutos')
 const Produto = require('./Produto')
+const Serializador = require('../../../Serializador').SerializadorProduto
 
 roteador.get('/', async (req, res) => {
     const produtos = await tabela.listar(req.fornecedor.id)
-    res.json(produtos)
+    const serializador = new Serializador(res.getHeader('Content-Type'))
+    res.send(serializador.serializar(produtos))
 })
 
 roteador.post('/', async(req, res, next) => {
@@ -14,7 +16,8 @@ roteador.post('/', async(req, res, next) => {
         const dados = Object.assign({}, corpo, {fornecedor: idFornecedor})
         const produto = new Produto(dados)
         await produto.criar()
-        res.json(produto).status(201)
+        const serializador = new Serializador(res.getHeader('Content-Type'))
+        res.send(serializador.serializar(produto)).status(201)
     }catch(err){
         next(err)
     }
@@ -32,14 +35,14 @@ roteador.delete('/:idProduto', async (req, res) => {
 
 roteador.get('/:idProduto', async(req, res, next) => {
     try{
-        dados = {
+        const dados = {
             id: req.params.idProduto,
             fornecedor: req.fornecedor.id
         }
         const produto = new Produto(dados)
         await produto.carregarUmProduto()
-        
-        res.json(produto)
+        const serializador = new Serializador(res.getHeader('Content-Type'), ['preco','estoque','fornecedor','dataCriacao','dataAtualizacao','versao'])
+        res.send(serializador.serializar(produto))
     }catch(err){
         next(err)
     }

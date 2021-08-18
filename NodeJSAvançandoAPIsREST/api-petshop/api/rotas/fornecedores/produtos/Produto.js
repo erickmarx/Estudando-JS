@@ -42,6 +42,7 @@ class Produto{
     }
 
     async carregarUmProduto(){
+        
         const produto = await tabela.carregarUmProduto(this.id, this.fornecedor)
         this.titulo = produto.titulo
         this.preco = produto.preco
@@ -49,6 +50,7 @@ class Produto{
         this.dataCriacao = produto.dataCriacao
         this.dataAtualizacao = produto.dataAtualizacao
         this.versao = produto.versao
+        
         
     }
 }

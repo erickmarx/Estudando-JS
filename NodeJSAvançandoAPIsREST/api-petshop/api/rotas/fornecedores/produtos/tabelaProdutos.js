@@ -5,7 +5,8 @@ module.exports = {
         return Modelo.findAll({
             where: {
                 fornecedor: idFornecedor
-            }
+            },
+            raw: true
         })
     },
 
@@ -22,13 +23,15 @@ module.exports = {
         })
     },
 
-    carregarUmProduto(idProduto, idFornecedor){
-        const encontrado = Modelo.findOne({
+    async carregarUmProduto(idProduto, idFornecedor){
+        const encontrado = await Modelo.findOne({
             where: {
                 id: idProduto,
                 fornecedor: idFornecedor
-            }
+            },
+            raw: true
         })
+        // console.log(encontrado)
         if(!encontrado){
             throw new Error('Produto não encontrado')
         }
