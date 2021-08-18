@@ -1,5 +1,5 @@
 const Modelo = require('./modeloTabelaProduto')
-
+const instancia = require('../../../banco-de-dados')
 module.exports = {
     listar(idFornecedor){
         return Modelo.findAll({
@@ -31,7 +31,7 @@ module.exports = {
             },
             raw: true
         })
-        // console.log(encontrado)
+        console.log(encontrado)
         if(!encontrado){
             throw new Error('Produto não encontrado')
         }
@@ -42,6 +42,23 @@ module.exports = {
     async atualizar(dadosProduto, dadosParaAtualizar){
         return await Modelo.update(dadosParaAtualizar, {
             where: dadosProduto
+        })
+    },
+
+    subtrair(idProduto, idFornecedor, campo, quantidade){
+        return instancia.transaction(async transaction => {
+            const produto = await Modelo.findOne({
+                where: {
+                    id: idProduto,
+                    fornecedor: idFornecedor
+                }
+
+            })
+            produto[campo] = quantidade
+
+            await produto.save()
+
+            return produto
         })
     }
 }

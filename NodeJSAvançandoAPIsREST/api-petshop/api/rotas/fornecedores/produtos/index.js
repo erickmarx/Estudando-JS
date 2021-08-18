@@ -63,4 +63,22 @@ roteador.put('/:idProduto', async(req, res, next) => {
     }
 })
 
+roteador.post('/:idProduto/diminuirEstoque', async(req, res, next) => {
+    try{
+        const produto = new Produto({
+            id: req.params.idProduto,
+            fornecedor: req.fornecedor.id
+        })
+
+        await produto.carregarUmProduto()
+        produto.estoque = produto.estoque - req.body.quantidade
+        // console.log(produto.estoque)
+        await produto.diminuirEstoque()
+        res.status(204).end()
+
+    }catch(err){
+        next(err)
+    }
+})
+
 module.exports = roteador
