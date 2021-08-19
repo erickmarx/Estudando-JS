@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true}))
 
 
 app.use((req, res, next) => {
+    res.set('X-Powered-By', 'Gatito')
     let formatoRequisitado = req.header('Accept')
 
     if(formatoRequisitado === '*/*'){

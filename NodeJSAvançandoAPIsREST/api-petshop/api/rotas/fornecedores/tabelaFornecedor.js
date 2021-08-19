@@ -15,7 +15,7 @@ module.exports = {
             where: {id: id}
         })
         if(!encontrado){
-            throw new NaoEncontrado()
+            throw new NaoEncontrado('Fornecedor')
         }
 
         return encontrado
