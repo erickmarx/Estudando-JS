@@ -1,7 +1,6 @@
 const express = require('express')
 const config = require('config')
 const app = express()
-const roteador = require('./rotas/fornecedores/index')
 const NaoEncontrado = require('./erros/NaoEncontrado')
 const CampoInvalido = require('./erros/CampoInvalido')
 const DadosNaoFornecidos = require('./erros/DadosNaoFornecidos')
@@ -35,7 +34,12 @@ app.use(cors(), (req, res, next) => {
     next()
 })
 
+const roteador = require('./rotas/fornecedores/index')
 app.use('/api/fornecedores', roteador)
+
+const roteadorV2 = require('./rotas/fornecedores/rotas.v2')
+app.use('/api/v2/fornecedores', roteadorV2)
+
 
 app.use((err, _, res, next) => {
     let status = 500
