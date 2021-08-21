@@ -1,45 +1,42 @@
 const database = require('../models')
 
-class PessoaController{
-
-    
-    static async pegarTodasAsPessoas(req, res){
+class TurmaController{
+    static async pegarTodasAsTurmas(req, res){
         try {
-            const todasAsPessoas = await database.Pessoas.findAll()
-            return res.status(200).json(todasAsPessoas)
+            const todasAsTurmas = await database.Turmas.findAll()
+            return res.status(200).json(todasAsTurmas)
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
-    
     static async buscarID(id){
         try {
-            const umaPessoa = await database.Pessoas.findOne({
+            const umaTurma = await database.Turmas.findOne({
                 where: {
                     id: Number(id)
                 }
             })
-            return umaPessoa
+            return umaTurma
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
-    static async pegarUmaPessoa(req, res){
+    static async pegarUmaTurma(req, res){
         const {id} = req.params
         try{
-            const buscar = await PessoaController.buscarID(id)
+            const buscar = await TurmaController.buscarID(id)
             return res.status(200).json(buscar)    
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
 
-    static async criarPessoa(req, res){
+    static async criarTurma(req, res){
         try {
-            const novaPessoa = req.body
-            const novaPessoaCriada = await database.Pessoas.create(novaPessoa)
+            const infos = req.body
+            const novoTurma = await database.Turmas.create(infos)
             
-            return res.status(201).json(novaPessoaCriada)
+            return res.status(201).json(novoTurma)
         } catch (error) {
             return res.status(500).json(error.message)
         }
@@ -50,13 +47,13 @@ class PessoaController{
             const infos = req.body
             const {id} = req.params
             
-            await database.Pessoas.update(infos, {
+            await database.Turmas.update(infos, {
                 where: {
                     id: Number(id)
                 }
             })
             
-            const mostrarATT = await PessoaController.buscarID(id)
+            const mostrarATT = await TurmaController.buscarID(id)
 
             return res.status(200).json(mostrarATT)
 
@@ -65,15 +62,15 @@ class PessoaController{
         }
     }
 
-    static async excluirPessoa(req, res){
+    static async excluirTurma(req, res){
         const {id} = req.params
         try {
-            const destruir = await database.Pessoas.destroy({
+            const destruir = await database.Turmas.destroy({
                 where: {
                     id: id
                 }
             })
-
+            
             if (destruir){
                 return res.status(200).json(`ID ${id} deletado`)
             } else{
@@ -86,4 +83,4 @@ class PessoaController{
     }
 }
 
-module.exports = PessoaController
+module.exports = TurmaController

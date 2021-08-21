@@ -1,62 +1,59 @@
 const database = require('../models')
 
-class PessoaController{
-
-    
-    static async pegarTodasAsPessoas(req, res){
+class NivelController{
+    static async pegarTodosOsNiveis(req, res){
         try {
-            const todasAsPessoas = await database.Pessoas.findAll()
-            return res.status(200).json(todasAsPessoas)
+            const todosOsNiveis = await database.Niveis.findAll()
+            return res.status(200).json(todosOsNiveis)
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
-    
     static async buscarID(id){
         try {
-            const umaPessoa = await database.Pessoas.findOne({
+            const umNivel = await database.Niveis.findOne({
                 where: {
                     id: Number(id)
                 }
             })
-            return umaPessoa
+            return umNivel
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
-    static async pegarUmaPessoa(req, res){
+    static async pegarUmNivel(req, res){
         const {id} = req.params
         try{
-            const buscar = await PessoaController.buscarID(id)
+            const buscar = await NivelController.buscarID(id)
             return res.status(200).json(buscar)    
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
 
-    static async criarPessoa(req, res){
+    static async criarNivel(req, res){
         try {
-            const novaPessoa = req.body
-            const novaPessoaCriada = await database.Pessoas.create(novaPessoa)
+            const infos = req.body
+            const novoNivelAtt = await database.Niveis.create(infos)
             
-            return res.status(201).json(novaPessoaCriada)
+            return res.status(201).json(novoNivelAtt)
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
 
-    static async atualizarPessoa(req, res){
+    static async atualizarNivel(req, res){
         try {
             const infos = req.body
             const {id} = req.params
             
-            await database.Pessoas.update(infos, {
+            await database.Niveis.update(infos, {
                 where: {
                     id: Number(id)
                 }
             })
             
-            const mostrarATT = await PessoaController.buscarID(id)
+            const mostrarATT = await NivelController.buscarID(id)
 
             return res.status(200).json(mostrarATT)
 
@@ -65,10 +62,10 @@ class PessoaController{
         }
     }
 
-    static async excluirPessoa(req, res){
+    static async excluirNivel(req, res){
         const {id} = req.params
         try {
-            const destruir = await database.Pessoas.destroy({
+            const destruir = await database.Niveis.destroy({
                 where: {
                     id: id
                 }
@@ -86,4 +83,4 @@ class PessoaController{
     }
 }
 
-module.exports = PessoaController
+module.exports = NivelController
