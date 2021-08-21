@@ -33,6 +33,8 @@ roteador.delete('/:idProduto', async (req, res) => {
         id: req.params.idProduto,
         fornecedor: req.fornecedor.id
     }
+
+    const {idProduto:id, fornecedor} = req.params
     const produto = new Produto(dados)
     await produto.deletar(dados)
     res.status(204).end()
