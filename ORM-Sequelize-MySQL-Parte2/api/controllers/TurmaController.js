@@ -42,7 +42,7 @@ class TurmaController{
         }
     }
 
-    static async atualizarPessoa(req, res){
+    static async atualizarTurma(req, res){
         try {
             const infos = req.body
             const {id} = req.params
@@ -81,6 +81,23 @@ class TurmaController{
             return res.status(500).json(error.message)
         }
     }
+
+    static async restaurarTurma(req, res){
+        const {id} = req.params
+        try {
+            const restaurar = await database.Turmas.restore({
+                where: {id: Number(id)}
+            })
+            if (restaurar){
+                return res.status(200).json(`ID da Turma ${id} restaurado`)
+            } else{
+                return res.status(400).json(`ID da Turma ${id} não restaurado`)
+            }
+        }
+         catch (error) {
+            return res.status(500).json(error.message)
+            }
+        }
 }
 
 module.exports = TurmaController

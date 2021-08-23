@@ -70,7 +70,7 @@ class PessoaController{
         try {
             const destruir = await database.Pessoas.destroy({
                 where: {
-                    id: id
+                    id: Number(id)
                 }
             })
 
@@ -80,6 +80,22 @@ class PessoaController{
                 return res.status(400).json(`ID ${id} não encontrado`)
             }
             
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async restaurarPessoa(req, res){
+        const {id} = req.params
+        try {
+            const restaurar = await database.Pessoas.restore({
+                where: {id: Number(id)}
+            })
+            if (restaurar){
+                return res.status(200).json(`ID da Pessoa ${id} restaurado`)
+            } else{
+                return res.status(400).json(`ID da Pessoa ${id} não restaurado`)
+            }
         } catch (error) {
             return res.status(500).json(error.message)
         }
@@ -160,6 +176,25 @@ class PessoaController{
                 return res.status(200).json(`ID da Matricula ${matriculaID} deletado`)
             } else{
                 return res.status(400).json(`ID da Matricula ${matriculaID} não encontrado`)
+            }
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async restaurarMatricula(req, res){
+        const {estudanteID, matriculaID} = req.params
+        try {
+            const restaurar = await database.Matriculas.restore({
+                where: {
+                    id: Number(matriculaID),
+                    estudante_id: Number(estudanteID)
+                }
+            })
+            if (restaurar){
+                return res.status(200).json(`ID da Matricula ${matriculaID} restaurado`)
+            } else{
+                return res.status(400).json(`ID da Matricula ${matriculaID} não restaurado`)
             }
         } catch (error) {
             return res.status(500).json(error.message)

@@ -8,6 +8,7 @@ router
 .post('/pessoas', PessoaController.criarPessoa)
 .put('/pessoas/:id', PessoaController.atualizarPessoa)
 .delete('/pessoas/:id', PessoaController.excluirPessoa)
+.post('/pessoas/:id/restaurar', PessoaController.restaurarPessoa)
 
 //Matriculas:
 .get('/pessoas/:estudanteID/matricula/:matriculaID', PessoaController.pegarUmaMatricula)
@@ -15,5 +16,6 @@ router
 .post('/pessoas/:estudanteID/matricula', PessoaController.criarMatricula)
 .put('/pessoas/:estudanteID/matricula/:matriculaID', PessoaController.atualizarMatricula)
 .delete('/pessoas/:estudanteID/matricula/:matriculaID', PessoaController.excluirMatricula)
+.post('/pessoas/:estudanteID/matricula/:matriculaID/restaurar', PessoaController.restaurarMatricula)
 
 module.exports = router
