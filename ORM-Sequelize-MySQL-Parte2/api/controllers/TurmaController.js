@@ -1,6 +1,19 @@
 const database = require('../models')
 const Op = require('Sequelize').Op
 class TurmaController{
+    static async buscarID(id){
+        try {
+            const umaTurma = await database.Turmas.findOne({
+                where: {
+                    id: Number(id)
+                }
+            })
+            return umaTurma
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
     static async pegarTodasAsTurmas(req, res){
         const {dataInicial, dataFinal}= req.query
         const where = {}
@@ -23,18 +36,6 @@ class TurmaController{
     //     }
     // }
 
-    static async buscarID(id){
-        try {
-            const umaTurma = await database.Turmas.findOne({
-                where: {
-                    id: Number(id)
-                }
-            })
-            return umaTurma
-        } catch (error) {
-            return res.status(500).json(error.message)
-        }
-    }
     static async pegarUmaTurma(req, res){
         const {id} = req.params
         try{
@@ -44,6 +45,7 @@ class TurmaController{
             return res.status(500).json(error.message)
         }
     }
+
 
     static async criarTurma(req, res){
         try {

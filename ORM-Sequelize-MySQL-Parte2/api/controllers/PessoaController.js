@@ -1,4 +1,5 @@
 const database = require('../models')
+const sequelize = require('sequelize')
 
 class PessoaController{
 
@@ -166,6 +167,26 @@ class PessoaController{
                 order: [['estudante_id', 'ASC']]
             })
             return res.status(200).json(turma)
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async pegarTurmasLotada(req, res){
+        // const {matriculaID} = req.params
+        const maximo = 2
+        try {
+            const turmasLotadas = await database.Matriculas
+            .findAndCountAll({
+                where: {
+                    status: 'confirmado'
+                },
+                attributes: ['turma_id'],
+                group: ['turma_id'],
+                having: sequelize.literal(`count(turma_id) >= ${maximo}`)
+            })
+
+            return res.status(200).json(turmasLotadas.count)
         } catch (error) {
             return res.status(500).json(error.message)
         }
