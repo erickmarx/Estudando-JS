@@ -19,7 +19,7 @@ router
 .get('/turma/lotadas', PessoaController.pegarTurmasLotada)
 .post('/pessoas/:estudanteID/matricula', PessoaController.criarMatricula)
 .put('/pessoas/:estudanteID/matricula/:matriculaID', PessoaController.atualizarMatricula)
-.put('/pessoas/:estudanteID/cancelar', PessoaController.cancelaPessoa)
+.put('  ', PessoaController.cancelaPessoa)
 .delete('/pessoas/:estudanteID/matricula/:matriculaID', PessoaController.excluirMatricula)
 .post('/pessoas/:estudanteID/matricula/:matriculaID/restaurar', PessoaController.restaurarMatricula)
 
