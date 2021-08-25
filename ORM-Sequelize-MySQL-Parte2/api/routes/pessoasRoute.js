@@ -1,6 +1,6 @@
 const {Router} = require('express')
 const router = Router()
-const PessoaController = require('../controllers/PessoaController')
+const PessoaController = require('../controllers/CopiaPessoaController')
 
 router
 .get('/pessoas', PessoaController.pegarTodasAsPessoas)
@@ -8,6 +8,7 @@ router
 .get('/pessoas/:id', PessoaController.pegarUmaPessoa)
 .post('/pessoas', PessoaController.criarPessoa)
 .put('/pessoas/:id', PessoaController.atualizarPessoa)
+.put('/pessoas/:estudanteID/cancelar', PessoaController.cancelaPessoa)
 .delete('/pessoas/:id', PessoaController.excluirPessoa)
 .post('/pessoas/:id/restaurar', PessoaController.restaurarPessoa)
 
@@ -19,7 +20,6 @@ router
 .get('/turma/lotadas', PessoaController.pegarTurmasLotada)
 .post('/pessoas/:estudanteID/matricula', PessoaController.criarMatricula)
 .put('/pessoas/:estudanteID/matricula/:matriculaID', PessoaController.atualizarMatricula)
-.put('  ', PessoaController.cancelaPessoa)
 .delete('/pessoas/:estudanteID/matricula/:matriculaID', PessoaController.excluirMatricula)
 .post('/pessoas/:estudanteID/matricula/:matriculaID/restaurar', PessoaController.restaurarMatricula)
 
