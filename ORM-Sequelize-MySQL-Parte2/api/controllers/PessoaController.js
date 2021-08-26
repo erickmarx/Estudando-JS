@@ -3,15 +3,7 @@ const pessoasServices = new PessoasServices()
 
 class PessoaController{
 
-    static async pegarPessoasAtivas(req, res){
-        try {
-            const todasAsPessoas = await pessoasServices.pegarRegistrosAtivos()
-            return res.status(200).json(todasAsPessoas)
-        } catch (error) {
-            return res.status(500).json(error.message)
-        }
-    }
-
+    
     static async pegarTodasAsPessoas(req, res){
         try {
             const pessoasAtivas = await pessoasServices.pegarTodosOsRegistros()
@@ -21,6 +13,15 @@ class PessoaController{
         }
     }
     
+    static async pegarPessoasAtivas(req, res){
+        try {
+            const todasAsPessoas = await pessoasServices.mostrarTodosRegistros()
+            return res.status(200).json(todasAsPessoas)
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
     static async pegarUmaPessoa(req, res){
         const {estudanteID} = req.params
         try {
@@ -34,7 +35,7 @@ class PessoaController{
     static async criarPessoa(req, res){
         const infos = req.body
         try {
-            const criado = await pessoasServices.criarUmaPessoa(infos)
+            const criado = await pessoasServices.criarUmRegistro(infos)
             return res.status(200).json(criado)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -66,7 +67,7 @@ class PessoaController{
     static async excluirPessoa(req, res){
         const {estudanteID} = req.params
         try {
-            await pessoasServices.softDeletePessoa(estudanteID)
+            await pessoasServices.excluirUmRegistro({id: estudanteID})
             return res.status(200).json('Soft Deleted')
         } catch (error) {
             return res.status(500).json(error.message)
@@ -77,7 +78,7 @@ class PessoaController{
         try {
             const {estudanteID} = req.params
             // console.log(estudanteID)
-            await pessoasServices.restaurarPessoaEMatricula(Number(estudanteID))
+            await pessoasServices.estaurarUmRegistro({id: estudanteID})
             return res.status(200).json('Restaurado')
         } catch (error) {
             return res.status(500).json(error.message)

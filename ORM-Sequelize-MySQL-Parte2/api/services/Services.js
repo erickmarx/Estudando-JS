@@ -4,17 +4,22 @@ class Services{
     constructor(nomeDoModelo){
         this.nomeDoModelo = nomeDoModelo
     }
-
-    async pegarEContarRegistros(where = {}){
-        return database[this.nomeDoModelo].findAndCountAll({...where})
-    }
-
-    async pegaTodosOsRegistros(where = {}){
+    
+    async mostrarTodosRegistros(where = {}){
         return database[this.nomeDoModelo].findAll({...where})
     }
 
+    // async pegarEContarRegistros(where = {}){
+    //     return database[this.nomeDoModelo].findAndCountAll({...where})
+    // }
+
+
     async pegarUmRegistro(where = {}){
         return database[this.nomeDoModelo].findOne({...where})
+    }
+    
+    async criarUmRegistro(infos){
+        return database[this.nomeDoModelo].create(infos)
     }
 
     async atualizarRegistro(dadosAtualizados, id, where = {}, transacao = {}){
@@ -27,9 +32,6 @@ class Services{
         .update(dadosAtualizados, {where: {...where}}, transacao)
     }
     
-    async criarUmRegistro(infos){
-        return database[this.nomeDoModelo].create(infos)
-    }
 
     async excluirUmRegistro(where = {}){
         return database[this.nomeDoModelo].destroy({where: {...where}})

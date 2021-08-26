@@ -6,7 +6,7 @@ class MatriculaController{
     static async pegarUmaMatricula(req, res){
         const {estudanteID, matriculaID} = req.params
         try {
-            const matricula = await matriculasServices.pegarUmaMatricula(estudanteID, matriculaID)
+            const matricula = await matriculasServices.pegarUmRegistro({where: {id: Number(matriculaID), estudante_id: Number(estudanteID)}})
             return res.status(200).json(matricula)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -16,7 +16,7 @@ class MatriculaController{
     static async pegarTodasAsMatriculas(req, res){
         const {estudanteID} = req.params
         try {
-            const matriculas = await matriculasServices.PegarMatriculas(estudanteID)
+            const matriculas = await matriculasServices.mostrarTodosRegistros({where: {estudante_id: Number(estudanteID)}})
             return res.status(200).json(matriculas)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -26,7 +26,7 @@ class MatriculaController{
     static async pegarMatriculasConfirmadas(req, res){
         const {estudanteID} = req.params
         try {
-           const matriculado = await matriculasServices.matriculasConfirmadas(estudanteID)
+           const matriculado = await matriculasServices.mostrarTodosRegistros({where: {estudante_id: Number(estudanteID), status: 'confirmado'}})
             return res.status(200).json(matriculado)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -36,7 +36,7 @@ class MatriculaController{
     static async pegarMatriculasPorTurma(req, res){
         const {turmaID} = req.params
         try {
-           const confirmado = await matriculasServices.matriculasPorTurma(turmaID)
+           const confirmado = await matriculasServices.mostrarTodosRegistros({where: {turma_id: Number(turmaID), status: 'confirmado'}})
             return res.status(200).json(confirmado)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -47,7 +47,7 @@ class MatriculaController{
         const {estudanteID} = req.params
         const novaMatricula = {...req.body, estudante_id: Number(estudanteID)} 
         try {
-            const matriculado = await matriculasServices.criarMatricula(novaMatricula)
+            const matriculado = await matriculasServices.criarUmRegistro(novaMatricula)
 
             return res.status(201).json(matriculado)
         } catch (error) {
@@ -69,7 +69,7 @@ class MatriculaController{
     static async excluirMatricula(req, res){
         const {estudanteID , matriculaID} = req.params
         try {
-            const destruir = await matriculasServices.softDeleteMatricula(estudanteID, matriculaID)
+            const destruir = await matriculasServices.excluirUmRegistro({estudante_id: estudanteID, id: matriculaID})
 
             return destruir ? res.status(200).json(`ID da Matricula ${matriculaID} softdeleted`) : res.status(400).json(`ID da Matricula ${matriculaID} não encontrado`) 
         } catch (error) {
