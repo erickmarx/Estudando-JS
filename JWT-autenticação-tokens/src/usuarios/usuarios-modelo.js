@@ -1,31 +1,41 @@
 const usuariosDao = require('./usuarios-dao');
 const { InvalidArgumentError } = require('../erros');
 const validacoes = require('../validacoes-comuns');
+const bcrypt = require('bcrypt')
 
 class Usuario {
   constructor(usuario) {
     this.id = usuario.id;
     this.nome = usuario.nome;
     this.email = usuario.email;
-    this.senha = usuario.senha;
-
+    this.senhaHash = usuario.senhaHash;
+    
     this.valida();
   }
-
-  async adiciona() {
+  
+  async adiciona(senha) {
     if (await Usuario.buscaPorEmail(this.email)) {
       throw new InvalidArgumentError('O usuário já existe!');
     }
-
+    
+    this.senhaHash = await Usuario.gerarSenhaHash(senha)
     return usuariosDao.adiciona(this);
   }
+
+
+  static gerarSenhaHash(senha){
+    const custo = 12
+    validacoes.campoStringNaoNulo(senha, 'senha');
+    validacoes.campoTamanhoMinimo(senha, 'senha', 8);
+    validacoes.campoTamanhoMaximo(senha, 'senha', 64);
+    return bcrypt.hash(senha, custo)
+  }
+ 
 
   valida() {
     validacoes.campoStringNaoNulo(this.nome, 'nome');
     validacoes.campoStringNaoNulo(this.email, 'email');
-    validacoes.campoStringNaoNulo(this.senha, 'senha');
-    validacoes.campoTamanhoMinimo(this.senha, 'senha', 8);
-    validacoes.campoTamanhoMaximo(this.senha, 'senha', 64);
+    
   }
 
   
@@ -54,6 +64,7 @@ class Usuario {
   static lista() {
     return usuariosDao.lista();
   }
+
 }
 
 module.exports = Usuario;
