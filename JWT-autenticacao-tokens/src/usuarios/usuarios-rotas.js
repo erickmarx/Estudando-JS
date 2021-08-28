@@ -10,7 +10,7 @@ module.exports = app => {
   app
     .route('/usuario')
     .post(usuariosControlador.adiciona)
-    .get(usuariosControlador.lista);
+    .get(usuariosControlador.lista)
 
   app.route('/usuario/:id').delete(usuariosControlador.deleta);
 };
