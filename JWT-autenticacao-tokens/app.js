@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const {estrategiasAutenticacao} = require('./src/usuarios')
+require('./src/usuarios') //Estrategias Autenticação
 
 
 app
