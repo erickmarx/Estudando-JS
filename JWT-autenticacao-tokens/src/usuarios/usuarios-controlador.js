@@ -7,7 +7,8 @@ function criaTokenJWT(usuario){
     id: usuario.id
   }
 
-  return jwt.sign(payload, process.env.CHAVE_JWT)
+  const token = jwt.sign(payload, process.env.CHAVE_JWT)
+  return token
 }
 
 module.exports = {
