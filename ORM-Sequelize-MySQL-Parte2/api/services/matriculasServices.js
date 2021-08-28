@@ -13,15 +13,15 @@ class MatriculasServices extends Services{
         })
         return super.pegarUmRegistro({id: matriculaID})
     }
+    async TurmasLotadas(maximo){
+        return super.pegarEContarRegistros({where: 
+            {status: 'confirmado'},
+            attributes: ['turma_id'],
+            group: ['turma_id'],
+            having: database.sequelize.literal(`count(turma_id) >= ${maximo}`)})
+    }
 }
 
 module.exports = MatriculasServices
 
 
-// async TurmasLotadas(maximo){
-//     return super.pegarEContarRegistros({where: 
-//         {status: 'confirmado'},
-//         attributes: ['turma_id'],
-//         group: ['turma_id'],
-//         having: sequelize.literal(`count(turma_id) >= ${maximo}`)})
-// }

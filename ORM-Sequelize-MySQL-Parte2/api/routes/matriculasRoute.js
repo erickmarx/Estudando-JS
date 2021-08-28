@@ -11,8 +11,7 @@ router
 .put('/pessoas/:estudanteID/matricula/:matriculaID', MatriculaController.atualizarUmaMatricula)
 .delete('/pessoas/:estudanteID/matricula/:matriculaID', MatriculaController.excluirMatricula)
 .post('/pessoas/:estudanteID/matricula/:matriculaID/restaurar', MatriculaController.restaurarMatricula)
+// .get('/turma/lotadas', MatriculaController.pegarTurmasLotada)
 
 module.exports = router
 
-
-// .get('/turma/lotadas', MatriculaController.pegarTurmasLotada)

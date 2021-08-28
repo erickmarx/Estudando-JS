@@ -45,7 +45,7 @@ class MatriculaController{
         
     static async criarNovaMatricula(req, res){
         const {estudanteID} = req.params
-        const novaMatricula = {...req.body, estudante_id: Number(estudanteID)} 
+        const novaMatricula = {...req.body, estudante_id: Number(estudanteID)}
         try {
             const matriculado = await matriculasServices.criarUmRegistro(novaMatricula)
 
@@ -88,20 +88,21 @@ class MatriculaController{
             return res.status(500).json(error.message)
         }
     }
+    static async pegarTurmasLotada(req, res){
+        const maximo = 2
+        try {
+            console.log(`log1:`)
+            const lotadas = await matriculasServices.TurmasLotadas(maximo)
+             return res.status(200).json(lotadas.count)
+         } catch (error) {
+             return res.status(500).json(error.message)
+         }
+    }
 }
 
 module.exports = MatriculaController
 
 
-    // static async pegarTurmasLotada(req, res){
-    //     const maximo = 2
-    //     try {
-    //         const lotadas = await matriculasServices.TurmasLotadas(maximo)
-    //          return res.status(200).json(lotadas.count)
-    //      } catch (error) {
-    //          return res.status(500).json(error.message)
-    //      }
-    // }
     
     // static async pegarTurmasLota(req, res){
     //     // const {matriculaID} = req.params

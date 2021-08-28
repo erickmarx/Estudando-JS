@@ -9,9 +9,9 @@ class Services{
         return database[this.nomeDoModelo].findAll({...where})
     }
 
-    // async pegarEContarRegistros(where = {}){
-    //     return database[this.nomeDoModelo].findAndCountAll({...where})
-    // }
+    async pegarEContarRegistros(where = {}){
+        return database[this.nomeDoModelo].findAndCountAll({...where})
+    }
 
 
     async pegarUmRegistro(where = {}){
