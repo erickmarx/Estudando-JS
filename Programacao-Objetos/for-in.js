@@ -16,8 +16,11 @@ const Cliente = {
 let relatorio = ""
 
 for (let i in Cliente){
-    if(typeof Cliente[i] === 'object'){
-        relatorio += Cliente[i]
+    if(typeof Cliente[i] === 'object' || typeof Cliente === 'function'){
+        continue
+    }else{
+        relatorio += `${i}: ${Cliente[i]}
+`
     }
 }
 
