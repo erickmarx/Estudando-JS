@@ -2,7 +2,7 @@ const passport = require('passport')
 
 module.exports = {
     local: (req, res, next) => {
-        passport.authenticate('local', {session: false}, (error ,usuario, infos) => {
+        passport.authenticate('local', {session: false}, (error ,usuario) => {
 
             if(error && error.name === 'InvalidArgumentError'){
                 return res.status(401).json({error: error.message})

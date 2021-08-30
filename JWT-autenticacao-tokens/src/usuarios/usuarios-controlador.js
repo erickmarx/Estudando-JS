@@ -32,7 +32,7 @@ module.exports = {
       } else {
         res.status(500).json({ erro: erro.message });
       }
-    }'Authorization', token
+    }
   },
 
   login: (req, res) => {
