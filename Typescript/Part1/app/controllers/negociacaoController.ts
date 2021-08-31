@@ -2,9 +2,9 @@ import { Negociacao } from "../models/negociacao.js";
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export class NegociacaoController{
-    private inputData: Number
-    private inputQuantidade: Number
-    private inputValor: Number
+    private inputData: HTMLInputElement
+    private inputQuantidade: HTMLInputElement
+    private inputValor: HTMLInputElement
 
     constructor(){
         this.inputData = document.querySelector('#data');
@@ -14,11 +14,11 @@ export class NegociacaoController{
 
 
     adiciona(){
-        const negociacao = new Negociacao(
-            this.inputData.value,
-            this.inputQuantidade.value,
-            this.inputValor.value
-        )
+        const exp = /-/g
+        const date = new Date(this.inputData.value.replace(exp, ','))
+        const quantidade = parseInt(this.inputQuantidade.value)
+        const valor = parseFloat(this.inputValor.value)
+        const negociacao = new Negociacao(date, quantidade, valor)
 
         console.log(negociacao)
     }
