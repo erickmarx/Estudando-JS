@@ -1,15 +1,12 @@
 import { Negociacao } from "../models/negociacao.js";
+import { Negociacoes } from "../models/negociacoes.js";
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export class NegociacaoController {
     constructor() {
+        this.negociacoes = new Negociacoes();
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');
-    }
-    adiciona() {
-        const negociacao = this.criaNegociacao();
-        console.log(negociacao);
-        this.limparForm();
     }
     criaNegociacao() {
         const exp = /-/g;
@@ -17,6 +14,13 @@ export class NegociacaoController {
         const quantidade = parseInt(this.inputQuantidade.value);
         const valor = parseFloat(this.inputValor.value);
         return new Negociacao(date, quantidade, valor);
+    }
+    adiciona() {
+        const negociacao = this.criaNegociacao();
+        this.negociacoes.adicionar(negociacao);
+        this.negociacoes.listar();
+        console.log(this.negociacoes.listar());
+        this.limparForm();
     }
     limparForm() {
         this.inputData.value = '';
