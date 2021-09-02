@@ -2,7 +2,7 @@ export class NegociacoesView {
     constructor(seletor) {
         this.elemento = document.querySelector(seletor);
     }
-    template() {
+    template(model) {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -17,7 +17,7 @@ export class NegociacoesView {
         </tbody>
         `;
     }
-    update() {
-        this.elemento.innerHTML = this.template();
+    update(model) {
+        this.elemento.innerHTML = this.template(model);
     }
 }
