@@ -1,12 +1,7 @@
 import { Negociacoes } from "../models/negociacoes.js"
+import { View } from "./view.js"
 
-export class NegociacoesView{
-
-    private elemento: HTMLElement
-
-    constructor(seletor: string){
-        this.elemento = document.querySelector(seletor)
-    }
+export class NegociacoesView extends View{
 
     template(model: Negociacoes): string {
         return `
@@ -18,12 +13,23 @@ export class NegociacoesView{
                     <th>VALOR</th>
                 </tr>
             </thead>
+            <tbody>
+            ${model.listar().map(negociacao => {
+                return `
+                <tr>
+                <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
+                <td>${negociacao.quantidade}</td>
+                <td>${negociacao.valor}</td>
+                </tr>
+                `
+            }).join('')}
+            </tbody>
         </table>
-        <tbody>
-        </tbody>
-        `
+            `
     }
     update(model: Negociacoes): void{
-        this.elemento.innerHTML = this.template(model)
+        const template = this.template(model)
+        console.log(template)
+        this.elemento.innerHTML = template
     }
 }
