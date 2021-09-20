@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: livraria
+    ports: 
+    - "3306:3306"
+    volumes: 
+    - ./db:/var/lib/mysql
