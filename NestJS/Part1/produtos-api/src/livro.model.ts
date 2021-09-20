@@ -15,7 +15,7 @@ export class Livro extends Model<Livro> {
   nome: string;
 
   @Column({
-    type: DataType.DECIMAL(2),
+    type: DataType.DECIMAL(10, 2),
     allowNull: false,
   })
   preco: number;
